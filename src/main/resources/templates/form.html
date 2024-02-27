@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>FileUD</title>
+<script th:src="@{/js/htmx.min.js}" type="text/javascript"></script>
+</head>
+<body>
+	<form th:hx-post="@{/upload}" enctype="multipart/form-data"
+		th:object="${test}" hx-target="#result" hx-swap="innerHTML">
+		<input th:field="*{file}" type="file"> <input type="submit">
+	</form>
+	<button type="button">
+		<a th:href="@{/download}">Download</a>
+	</button>
+	<div id="result"></div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>File Upload Example</title>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/htmx.min.js}" type="text/javascript"></script>
+</head>
+<body>
+	<div class="container-xl rounded shadow my-2 py-3 px-3">
+		<h1>Form</h1>
+		<form id="form"
+			class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-2 align-items-center"
+			th:hx-post="@{/upload}" hx-encoding="multipart/form-data"
+			hx-target="#message" hx-swap="innerHTML"
+			hx-request='\"timeout\":10000'>
+
+			<div class="col">
+				<input class="form-control" type="file" name="file">
+			</div>
+			<input class="col-md-auto col-sm-12 btn btn-primary" type="submit"
+				value="Upload">
+
+			<div id='progress' class="progress" role="progressbar"
+				aria-label="Animated striped example" aria-valuenow="0"
+				aria-valuemin="0" aria-valuemax="100">
+				<div id="progress-bar"
+					class="progress-bar progress-bar-striped progress-bar-animated"
+					style="width: 0%"></div>
+			</div>
+
+			<!-- 			<progress id='progress' value='0' max='100'></progress> -->
+			<p id="message"></p>
+		</form>
+	</div>
+</body>
+<script>
+	htmx.on('#form', 'htmx:xhr:progress', function(evt) {
+		htmx.find('#progress').setAttribute('aria-valuenow',
+				evt.detail.loaded / evt.detail.total * 100);
+	});
+	htmx.on('#form', 'htmx:xhr:progress', function(evt) {
+		htmx.find('#progress-bar').setAttribute('style',
+				"width: " + evt.detail.loaded / evt.detail.total * 100);
+	});
+</script>
+</html>
