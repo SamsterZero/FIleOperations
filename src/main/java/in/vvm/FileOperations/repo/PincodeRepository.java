@@ -7,5 +7,4 @@ import in.vvm.FileOperations.entity.Pincode;
 
 @Repository
 public interface PincodeRepository extends JpaRepository<Pincode, Integer> {
-
 }

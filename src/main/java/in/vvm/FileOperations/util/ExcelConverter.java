@@ -10,7 +10,6 @@ import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +19,7 @@ public class ExcelConverter<T> {
 	public List<T> excelToObjectList(MultipartFile file, Class<T> objectType) {
 		List<T> objectList = new ArrayList<>();
 		try {
-			Workbook workbook = new XSSFWorkbook(file.getInputStream());
+			XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
 			Sheet sheet = workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {

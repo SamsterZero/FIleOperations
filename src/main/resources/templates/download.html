@@ -1,0 +1,3 @@
+<a th:if="${excelContent}" th:href="@{/downloadExcel}"
+	hx-get="#excelContent" hx-trigger="click"> Download Excel </a>
+<p th:unless="${excelContent}">No Excel content available.</p>
