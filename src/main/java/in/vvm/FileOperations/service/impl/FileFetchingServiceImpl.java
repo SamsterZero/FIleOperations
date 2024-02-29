@@ -22,7 +22,6 @@ public class FileFetchingServiceImpl implements FileFetchingService {
 	public ByteArrayResource pinExcel() {
 		List<Pincode> pincodeList = pincodeRepository.findAll();
 		FileGenerator<Pincode> pinfile = new FileGenerator<>();
-		Date today = new Date();
-		return pinfile.generateExcel(today.toString() + ".xlsx", pincodeList);
+		return pinfile.generateExcel(pincodeList);
 	}
 }
