@@ -16,9 +16,8 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors(Customizer.withDefaults()).cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
-				.formLogin(form -> form.defaultSuccessUrl("/Home").permitAll()).httpBasic(Customizer.withDefaults());
+		httpSecurity.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+				.formLogin(form -> form.defaultSuccessUrl("/Home")).httpBasic(Customizer.withDefaults());
 		return httpSecurity.build();
 	}
 
@@ -29,14 +28,4 @@ public class SecurityConfig {
 				.password(passwordEncoder.encode("password")).roles("USER").and().withUser("admin")
 				.password(passwordEncoder.encode("admin")).roles("ADMIN");
 	}
-
-//	@Bean
-//	public UserDetailsService userDetailsService() {
-//		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//		UserDetails user = User.withUsername("user").password("user").roles("USER").build();
-//		UserDetails admin = User.withUsername("admin").password("admin").roles("ADMIN", "USER").build();
-//		manager.createUser(user);
-//		manager.createUser(admin);
-//		return manager;
-//	}
 }
