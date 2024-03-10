@@ -7,20 +7,39 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+version: '3.8'
 services:
-  server:
-    build:
-      context: .
+  db:
+    image: mysql:latest
+    container_name: vinaymysql
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3306
+    restart: always
+  app:
+    image: fileoperations:latest
     ports:
       - 8081:8080
-  #   depends_on:
-  #     - vinay-mysql
+    depends_on:
+      - db
+    container_name: fileoperations
+    # environment:
+    #   - spring.servlet.multipart.max-file-size=50MB
+    #   - spring.servlet.multipart.max-request-size=50MB
+    #   - spring.datasource.url=jdbc:mysql://db:3306/test
+    #   - spring.datasource.username=admin
+    #   - spring.datasource.password=root
+    #   - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    #   - spring.jpa.generate-ddl=true
+    #   - spring.jpa.hibernate.ddl-auto=create
+    #   - spring.jpa.database=default
+    #   - spring.jpa.show-sql=true
+    restart: always
 
-  # vinay-mysql:
-  #   image: mysql
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_ROOT_DB: test
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
@@ -28,22 +47,21 @@ services:
 # database data between container restarts. The `db-password` secret is used
 # to set the database password. You must create `db/password.txt` and add
 # a password of your choosing to it before running `docker-compose up`.
-#     depends_on:
-#       db:
-#         condition: service_healthy
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  # db:
+  #   image: mysl
+  #   restart: always
+  #   user: root
+  #   secrets:
+  #     - root
 #     volumes:
 #       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=root
+    # expose:
+    #   - 3307
 #     healthcheck:
 #       test: [ "CMD", "pg_isready" ]
 #       interval: 10s
