@@ -12,34 +12,40 @@ services:
   db:
     image: mysql:latest
     container_name: vinaymysql
+    ports:
+      - 3307:3306
     environment:
       MYSQL_DATABASE: test
       MYSQL_USER: admin
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 3307:3306
+    volumes:
+      - dbdata:/var/lib/mysql
     restart: always
   app:
-    image: fileoperations:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fileoperations
     ports:
       - 8081:8080
     depends_on:
       - db
     container_name: fileoperations
-    # environment:
-    #   - spring.servlet.multipart.max-file-size=50MB
-    #   - spring.servlet.multipart.max-request-size=50MB
-    #   - spring.datasource.url=jdbc:mysql://db:3306/test
-    #   - spring.datasource.username=admin
-    #   - spring.datasource.password=root
-    #   - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-    #   - spring.jpa.generate-ddl=true
-    #   - spring.jpa.hibernate.ddl-auto=create
-    #   - spring.jpa.database=default
-    #   - spring.jpa.show-sql=true
+    environment:
+      - spring.servlet.multipart.max-file-size=50MB
+      - spring.servlet.multipart.max-request-size=50MB
+      - spring.datasource.url=jdbc:mysql://vinaymysql:3306/test?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      - spring.datasource.username=admin
+      - spring.datasource.password=root
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      - spring.jpa.generate-ddl=true
+      - spring.jpa.hibernate.ddl-auto=create
+      - spring.jpa.database=default
+      - spring.jpa.show-sql=true
     restart: always
-
+volumes: 
+  dbdata:
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
