@@ -43,7 +43,6 @@ public class FileGenerator<T> {
 			workbook.write(outputStream);
 			byte[] excelBytes = outputStream.toByteArray();
 			return new ByteArrayResource(excelBytes);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

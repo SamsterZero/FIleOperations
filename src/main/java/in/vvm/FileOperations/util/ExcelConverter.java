@@ -18,8 +18,7 @@ public class ExcelConverter<T> {
 
 	public List<T> excelToObjectList(MultipartFile file, Class<T> objectType) {
 		List<T> objectList = new ArrayList<>();
-		try {
-			XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+		try (XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream())) {
 			Sheet sheet = workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {
