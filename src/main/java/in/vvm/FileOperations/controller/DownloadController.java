@@ -2,6 +2,7 @@ package in.vvm.FileOperations.controller;
 
 import java.util.Date;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import in.vvm.FileOperations.service.FileFetchingService;
 
 @Controller
-public class DownlodController {
+@RequiredArgsConstructor
+public class DownloadController {
 
-	@Autowired
-	FileFetchingService fetchingService;
+	private final FileFetchingService fetchingService;
 
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(Model model) {
