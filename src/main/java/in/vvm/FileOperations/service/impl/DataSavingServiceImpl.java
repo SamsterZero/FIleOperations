@@ -11,15 +11,17 @@ import in.vvm.FileOperations.entity.Pincode;
 import in.vvm.FileOperations.repo.PincodeRepository;
 import in.vvm.FileOperations.service.DataSavingService;
 import in.vvm.FileOperations.util.ExcelConverter;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class DataSavingServiceImpl implements DataSavingService {
 
-	@Autowired
-	PincodeRepository pincodeRepository;
+	private final PincodeRepository pincodeRepository;
 
 	@Override
 	public String savePincodeData(MultipartFile file) {
+		Pincode p = new Pincode();
 		ExcelConverter<Pincode> excelConverter = new ExcelConverter<>();
 		List<Pincode> pincodeList = excelConverter.excelToObjectList(file, Pincode.class);
 		List<Pincode> flag = pincodeRepository.saveAll(pincodeList);

@@ -1,9 +1,7 @@
 package in.vvm.FileOperations.controller;
 
-import java.util.Date;
-
+import in.vvm.FileOperations.service.FileFetchingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import in.vvm.FileOperations.service.FileFetchingService;
+import java.util.Date;
 
 @Controller
 @RequiredArgsConstructor
