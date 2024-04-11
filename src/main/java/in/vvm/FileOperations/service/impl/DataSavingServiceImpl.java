@@ -1,8 +1,6 @@
 package in.vvm.FileOperations.service.impl;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +19,6 @@ public class DataSavingServiceImpl implements DataSavingService {
 
 	@Override
 	public String savePincodeData(MultipartFile file) {
-		Pincode p = new Pincode();
 		ExcelConverter<Pincode> excelConverter = new ExcelConverter<>();
 		List<Pincode> pincodeList = excelConverter.excelToObjectList(file, Pincode.class);
 		List<Pincode> flag = pincodeRepository.saveAll(pincodeList);
