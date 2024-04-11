@@ -17,7 +17,7 @@ public class UploadController {
 
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response,Model model) {
-		response.setHeader("hx-request", "v1");
+		response.setHeader("hx-response", "v1");
 		if (file.isEmpty()) {
 			return "Please select a file to upload.";
 		}
