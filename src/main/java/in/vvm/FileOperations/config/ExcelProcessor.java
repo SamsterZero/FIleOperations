@@ -1,11 +1,11 @@
-package in.vvm.FileOperations.config;
+// package in.vvm.FileOperations.config;
 
-import in.vvm.FileOperations.entity.Pincode;
-import org.springframework.batch.item.ItemProcessor;
+// import in.vvm.FileOperations.entity.Pincode;
+// import org.springframework.batch.item.ItemProcessor;
 
-public class ExcelProcessor implements ItemProcessor<Pincode, Pincode> {
-    @Override
-    public Pincode process(Pincode item) throws Exception {
-        return item;
-    }
-}
+// public class ExcelProcessor implements ItemProcessor<Pincode, Pincode> {
+//     @Override
+//     public Pincode process(Pincode item) throws Exception {
+//         return item;
+//     }
+// }

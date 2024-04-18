@@ -15,15 +15,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @EnableWebSecurity
 public class SecurityConfig {
 
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/static/public/**")
-				.addResourceLocations("classpath:/static/public/");
-		// Resources controlled by Spring Security, which
-		// adds "Cache-Control: must-revalidate".
-		registry.addResourceHandler("/static/**")
-				.addResourceLocations("classpath:/static/")
-				.setCachePeriod(3600 * 24);
-	}
+	// public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	// 	registry.addResourceHandler("/static/public/**")
+	// 			.addResourceLocations("classpath:/static/public/");
+	// 	// Resources controlled by Spring Security, which
+	// 	// adds "Cache-Control: must-revalidate".
+	// 	registry.addResourceHandler("/static/**")
+	// 			.addResourceLocations("classpath:/static/")
+	// 			.setCachePeriod(3600 * 24);
+	// }
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
